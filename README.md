@@ -33,7 +33,7 @@ composer require towoju5/kyc-form
 ### Testing
 
 ```bash
-to setup middleware for routes. kindly go to config -> kyc-form.php
+      To setup middleware for routes. kindly go to config -> kyc-form.php
 ```
 
 ### Changelog
