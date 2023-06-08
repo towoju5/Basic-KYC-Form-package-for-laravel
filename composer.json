@@ -1,0 +1,54 @@
+{
+    "name": "towoju5/kyc-form",
+    "description": "a basic package for managing KYC data from customer.",
+    "keywords": [
+        "towoju5",
+        "kyc-form"
+    ],
+    "homepage": "https://github.com/towoju5/kyc-form",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "EMMANUEL TOWOJU",
+            "email": "towojuads@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0",
+        "illuminate/support": "^8.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Towoju5\\KycForm\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Towoju5\\KycForm\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Towoju5\\KycForm\\KycFormServiceProvider"
+            ],
+            "aliases": {
+                "KycForm": "Towoju5\\KycForm\\KycFormFacade"
+            }
+        }
+    }
+}
