@@ -15,9 +15,9 @@ use Towoju5\KycForm\Controllers\KycVerificationController;
 
 
 Route::get('/kyc/create', [KycVerificationController::class,  'create'])->name('kyc.create');
+Route::post('/kyc/store', [KycVerificationController::class,  'store'])->name('kyc.store');
 Route::group(['middleware' => config('kyc-form.middleware')], function () {
-    Route::post('/kyc/store', [KycVerificationController::class,  'store'])->name('kyc.store');
-    Route::get('/kyc', [KycVerificationController::class, 'index'])->name('kyc.index');
-    Route::post('/kyc/approve/{id}', [KycVerificationController::class, 'approve'])->name('kyc.approve');
-    Route::delete('/kyc/reject/{id}', [KycVerificationController::class, 'reject'])->name('kyc.reject');
+      Route::get('/kyc', [KycVerificationController::class, 'index'])->name('kyc.index');
+      Route::post('/kyc/approve/{id}', [KycVerificationController::class, 'approve'])->name('kyc.approve');
+      Route::delete('/kyc/reject/{id}', [KycVerificationController::class, 'reject'])->name('kyc.reject');
 });
