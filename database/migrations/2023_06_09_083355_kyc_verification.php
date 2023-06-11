@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKycVerificationTable extends Migration
+class KycVerification extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,17 @@ class CreateKycVerificationTable extends Migration
      */
     public function up()
     {
-        Schema::create('kyc_verification', function (Blueprint $table) {
+        Schema::create('kyc_verifications', function (Blueprint $table) {
             $table->id();
             $table->string('full_name');
             $table->string('address');
             $table->string('email');
             $table->string('id_number');
             $table->string('date_of_birth');
-            $table->string('id_document');
-            $table->string('proof_of_address');
-            $table->string('additional_document');
-            $table->string('approve')->nullable();
+            $table->string('id_document', 1000)->nullable();
+            $table->string('proof_of_address', 1000)->nullable();
+            $table->string('additional_document', 1000)->nullable();
+            $table->boolen('approve')->default(false);
             $table->timestamps();
         });
     }
@@ -35,6 +35,6 @@ class CreateKycVerificationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kyc_verification');
+        //
     }
 }

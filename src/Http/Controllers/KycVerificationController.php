@@ -1,18 +1,18 @@
 <?php
 
-namespace Towoju5\KycForm\Controllers;
+namespace Towoju5\KycForm\Http\Controllers;
 
-use App\KycVerification;
+use Towoju5\KycForm\Models\KycVerification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class KycVerificationController extends Controller
+class KycVerificationController
 {
 
     public function index()
     {
         $pendingVerifications = KycVerification::whereNull('approved_at')->get();
-        return view('kyc.index', compact('pendingVerifications'));
+        return view('kyc-form::kyc.index', compact('pendingVerifications'));
     }
 
     public function approve(Request $request, $id)
@@ -34,7 +34,13 @@ class KycVerificationController extends Controller
 
     public function create()
     {
-        return view('kyc.create');
+        return view('kyc-form::kyc.create');
+    }
+
+    public function show($kycId)
+    {
+        $kycVerification = KycVerification::findOrFail($kycId);
+        return view('kyc-form::kyc.show', compact('kycVerification'));
     }
 
     public function store(Request $request)
@@ -50,8 +56,25 @@ class KycVerificationController extends Controller
             'additional_document' => 'required',
         ]);
 
-        KycVerification::create($data);
+        if($request->hasFile('id_document')){
+            $data['id_document'] = KycVerification::save_image('kyc', $request->id_document);
+        }
 
-        return redirect()->back()->with('success', 'KYC verification submitted successfully.');
+        if($request->hasFile('proof_of_address')){
+            $data['proof_of_address'] = KycVerification::save_image('kyc', $request->proof_of_address);
+        }
+
+        if($request->hasFile('additional_document')){
+            $data['additional_document'] = KycVerification::save_image('kyc', $request->additional_document);
+        }
+
+        KycVerification::create($data);
+        if(null != (config('kyc-form.success_page'))){
+            return view(config('kyc-form.success'));
+        }
+        if(null != (config('kyc-form.success_url'))){
+            return redirect(config('kyc-form.success_url'));
+        }
+        return view('kyc-form::kyc_success');
     }
 }
