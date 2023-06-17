@@ -17,7 +17,7 @@ composer require towoju5/kyc-form
 ## Usage
 
 ```php
-      php artisan vendor:publish --provider="Towoju\KycForm\KycFormServiceProvider"
+      php artisan vendor:publish --provider="Towoju5\KycForm\KycFormServiceProvider"
       php  artisan migrate
 
 
