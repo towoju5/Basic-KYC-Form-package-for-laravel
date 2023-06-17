@@ -23,8 +23,9 @@ class KycVerification extends Migration
             $table->string('id_document', 1000)->nullable();
             $table->string('proof_of_address', 1000)->nullable();
             $table->string('additional_document', 1000)->nullable();
-            $table->boolen('approve')->default(false);
+            $table->boolean('approved_at')->default(false);
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 
