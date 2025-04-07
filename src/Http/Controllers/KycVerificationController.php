@@ -75,6 +75,6 @@ class KycVerificationController
         if(null != (config('kyc-form.success_url'))){
             return redirect(config('kyc-form.success_url'));
         }
-        return view('kyc-form::kyc_success');
+        return view('kyc-form::kyc.success');
     }
 }
